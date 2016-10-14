@@ -2,7 +2,11 @@ import React, { PropTypes } from 'react';
 
 const { func, string } = PropTypes;
 
-const FilterLink = ({ children, filter, onFilterClick }) => {
+const FilterLink = ({ children, currentFilter, filter, onFilterClick }) => {
+    if (filter === currentFilter) {
+        return <span>{ children }</span>;
+    }
+
     return (
         <a href='#' onClick={(e) => {
             e.preventDefault();
@@ -13,6 +17,7 @@ const FilterLink = ({ children, filter, onFilterClick }) => {
 
 FilterLink.propTypes = {
     children: string.isRequired,
+    currentFilter: string.isRequired,
     filter: string.isRequired,
     onFilterClick: func.isRequired,
 };

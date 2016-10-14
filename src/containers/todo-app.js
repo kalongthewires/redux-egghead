@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import AddTodo from './../components/add-todo';
-import FilterLink from './../components/filter-link';
+import Footer from './../components/footer';
 import TodoList from './../components/todo-list';
 
 const { array, func, string } = PropTypes;
@@ -23,16 +23,16 @@ class TodoApp extends Component {
     }
 
     render() {
-        console.log(getVisibleTodos(this.props.todos, this.props.visibilityFilter));
         return (
             <div>
                 <AddTodo onAddClick={this.props.onAddClick} />
                 <TodoList
                     todos={ getVisibleTodos(this.props.todos, this.props.visibilityFilter) }
                     onTodoClick={this.props.onTodoClick} />
-                <li><FilterLink onFilterClick={ this.props.onFilterClick } filter='SHOW_ALL'>All</FilterLink></li>
-                <li><FilterLink onFilterClick={ this.props.onFilterClick } filter='SHOW_ACTIVE'>Active</FilterLink></li>
-                <li><FilterLink onFilterClick={ this.props.onFilterClick } filter='SHOW_COMPLETED'>Completed</FilterLink></li>
+                <Footer
+                    onFilterClick={this.props.onFilterClick}
+                    currentFilter={this.props.visibilityFilter}
+                />
             </div>
         );
     }
