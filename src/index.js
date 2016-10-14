@@ -37,7 +37,7 @@ const render = () => {
             onAddClick={ onAddClick }
             onFilterClick={ onFilterClick }
             onTodoClick={ onTodoClick }
-            todos={store.getState().todos} />,
+            {...store.getState()} />,
         document.querySelector('.container'),  // eslint-disable-line no-undef
     );
 };

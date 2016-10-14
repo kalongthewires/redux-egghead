@@ -4,7 +4,7 @@ const { func, string } = PropTypes;
 
 const FilterLink = ({ children, filter, onFilterClick }) => {
     return (
-        <a href='#' onFilterClick={(e) => {
+        <a href='#' onClick={(e) => {
             e.preventDefault();
             onFilterClick(filter);
         }}>{ children }</a>

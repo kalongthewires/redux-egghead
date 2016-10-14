@@ -4,7 +4,18 @@ import AddTodo from './../components/add-todo';
 import FilterLink from './../components/filter-link';
 import TodoList from './../components/todo-list';
 
-const { array, func } = PropTypes;
+const { array, func, string } = PropTypes;
+
+const getVisibleTodos = (todos, filter) => {
+    switch(filter) {
+        case 'SHOW_ALL':
+            return todos;
+        case 'SHOW_COMPLETED':
+            return todos.filter(t => t.completed);
+        case 'SHOW_ACTIVE':
+            return todos.filter(t => !t.completed);
+    }
+};
 
 class TodoApp extends Component {
     constructor(props) {
@@ -12,13 +23,16 @@ class TodoApp extends Component {
     }
 
     render() {
+        console.log(getVisibleTodos(this.props.todos, this.props.visibilityFilter));
         return (
             <div>
                 <AddTodo onAddClick={this.props.onAddClick} />
-                <TodoList todos={this.props.todos} onTodoClick={this.props.onTodoClick} />
-                <li><FilterLink onFilterClick={ this.props.onFilterClick } filter='SHOW ALL'>All</FilterLink></li>
-                <li><FilterLink onFilterClick={ this.props.onFilterClick } filter='SHOW ACTIVE'>Active</FilterLink></li>
-                <li><FilterLink onFilterClick={ this.props.onFilterClick } filter='SHOW COMPLETED'>Completed</FilterLink></li>
+                <TodoList
+                    todos={ getVisibleTodos(this.props.todos, this.props.visibilityFilter) }
+                    onTodoClick={this.props.onTodoClick} />
+                <li><FilterLink onFilterClick={ this.props.onFilterClick } filter='SHOW_ALL'>All</FilterLink></li>
+                <li><FilterLink onFilterClick={ this.props.onFilterClick } filter='SHOW_ACTIVE'>Active</FilterLink></li>
+                <li><FilterLink onFilterClick={ this.props.onFilterClick } filter='SHOW_COMPLETED'>Completed</FilterLink></li>
             </div>
         );
     }
@@ -29,6 +43,7 @@ TodoApp.propTypes = {
     onFilterClick: func.isRequired,
     onTodoClick: func.isRequired,
     todos: array.isRequired,
+    visibilityFilter: string.isRequired,
 };
 
 export default TodoApp;
