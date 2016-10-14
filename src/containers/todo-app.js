@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 import AddTodo from './../components/add-todo';
 import Footer from './../components/footer';
@@ -17,26 +17,18 @@ const getVisibleTodos = (todos, filter) => {
     }
 };
 
-class TodoApp extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <div>
-                <AddTodo onAddClick={this.props.onAddClick} />
-                <TodoList
-                    todos={ getVisibleTodos(this.props.todos, this.props.visibilityFilter) }
-                    onTodoClick={this.props.onTodoClick} />
-                <Footer
-                    onFilterClick={this.props.onFilterClick}
-                    currentFilter={this.props.visibilityFilter}
-                />
-            </div>
-        );
-    }
-}
+const TodoApp = ({ onAddClick, onFilterClick, onTodoClick, todos, visibilityFilter }) => (
+    <div>
+        <AddTodo onAddClick={ onAddClick } />
+        <TodoList
+            todos={ getVisibleTodos(todos, visibilityFilter) }
+            onTodoClick={ onTodoClick } />
+        <Footer
+            onFilterClick={ onFilterClick }
+            currentFilter={ visibilityFilter }
+        />
+    </div>
+);
 
 TodoApp.propTypes = {
     onAddClick: func.isRequired,
