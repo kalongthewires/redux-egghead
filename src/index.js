@@ -1,15 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore } from 'redux';
 
-import App from './components/app';
-import reducers from './reducers';
+import TodoApp from './containers/todo-app';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+import TodoAppReducer from './reducers/todos.reducer';
+const store = createStore(TodoAppReducer);
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+let nextActionId = 0;
+
+const onAddClick = (text) => {
+    store.dispatch({
+        id: nextActionId++,
+        text: text,
+        type: 'ADD_TODO',
+    });
+};
+
+const onTodoClick = (todoId) => {
+    store.dispatch({
+        id: todoId,
+        type: 'TOGGLE_TODO',
+    });
+};
+
+const onFilterClick = (filter) => {
+    store.dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        filter
+    });
+};
+
+const render = () => {
+    ReactDOM.render(
+        <TodoApp
+            onAddClick={ onAddClick }
+            onFilterClick={ onFilterClick }
+            onTodoClick={ onTodoClick }
+            todos={store.getState().todos} />,
+        document.querySelector('.container'),  // eslint-disable-line no-undef
+    );
+};
+
+store.subscribe(render);
+render();
