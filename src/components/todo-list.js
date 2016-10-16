@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Todo from './todo';
 
-const { arrayOf, bool, func, number, shape, string } = PropTypes;
+const { arrayOf, bool, func, shape, string } = PropTypes;
 
 
 const TodoList = ({ onTodoClick, todos }) => (
@@ -19,7 +19,7 @@ const TodoList = ({ onTodoClick, todos }) => (
 TodoList.propTypes = {
     onTodoClick: func.isRequired,
     todos: arrayOf(shape({
-        id: number.isRequired,
+        id: string.isRequired,
         text: string.isRequired,
         completed: bool.isRequired,
     }).isRequired).isRequired,
