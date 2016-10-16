@@ -1,15 +1,11 @@
-import React, { PropTypes } from 'react';
-import FilterLink from './filter-link';
+import React from 'react';
+import FilterLink from './../containers/filter-link';
 
-const { func, string } = PropTypes;
-
-const Footer = ({ onFilterClick, currentFilter }) => {
+const Footer = () => {
     return (
         <ul>
             <li>
                 <FilterLink
-                    onFilterClick={ onFilterClick }
-                    currentFilter={ currentFilter }
                     filter='SHOW_ALL'
                 >
                     All
@@ -17,8 +13,6 @@ const Footer = ({ onFilterClick, currentFilter }) => {
             </li>
             <li>
                 <FilterLink
-                    onFilterClick={ onFilterClick }
-                    currentFilter={ currentFilter }
                     filter='SHOW_ACTIVE'
                 >
                     Active
@@ -26,8 +20,6 @@ const Footer = ({ onFilterClick, currentFilter }) => {
             </li>
             <li>
                 <FilterLink
-                    onFilterClick={ onFilterClick }
-                    currentFilter={ currentFilter }
                     filter='SHOW_COMPLETED'
                 >
                     Completed
@@ -35,11 +27,6 @@ const Footer = ({ onFilterClick, currentFilter }) => {
             </li>
         </ul>
     );
-};
-
-Footer.propTypes = {
-    currentFilter: string.isRequired,
-    onFilterClick: func.isRequired,
 };
 
 export default Footer;

@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 
-const { func } = PropTypes;
+let nextActionId = 0;
 
-const AddTodo = ({ onAddClick }) => {
+let AddTodo = ({ dispatch }) => { // eslint-disable-line react/prop-types
     let input;
 
     return (
@@ -11,15 +12,18 @@ const AddTodo = ({ onAddClick }) => {
                 input = node;
             }} />
             <button onClick={() => {
-                onAddClick(input.value);
+                dispatch({
+                    id: nextActionId++,
+                    text: input.value,
+                    type: 'ADD_TODO',
+                });
+
                 input.value = '';
             }}>Add Todo</button>
         </div>
     );
 };
 
-AddTodo.propTypes = {
-    onAddClick: func.isRequired,
-};
+AddTodo = connect()(AddTodo);
 
 export default AddTodo;

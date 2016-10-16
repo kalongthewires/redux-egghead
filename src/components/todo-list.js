@@ -7,7 +7,13 @@ const { arrayOf, bool, func, number, shape, string } = PropTypes;
 const TodoList = ({ onTodoClick, todos }) => {
     return (
         <ul>
-            { todos.map((todo) => <Todo key={todo.id} {...todo} onClick={() => onTodoClick(todo.id)} />) }
+            { todos.map((todo) =>
+                <Todo
+                    key={todo.id}
+                    {...todo}
+                    onClick={() => onTodoClick(todo.id)}
+                />)
+            }
         </ul>
     )
 };
