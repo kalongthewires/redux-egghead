@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-let nextActionId = 0;
+import addTodo from './../actions/add-todo';
 
 let AddTodo = ({ dispatch }) => { // eslint-disable-line react/prop-types
     let input;
@@ -12,12 +12,7 @@ let AddTodo = ({ dispatch }) => { // eslint-disable-line react/prop-types
                 input = node;
             }} />
             <button onClick={() => {
-                dispatch({
-                    id: nextActionId++,
-                    text: input.value,
-                    type: 'ADD_TODO',
-                });
-
+                dispatch(addTodo(input.value));
                 input.value = '';
             }}>Add Todo</button>
         </div>

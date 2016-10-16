@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import TodoList from './../components/todo-list';
+import toggleTodo from './../actions/toggle-todo';
 
 const getVisibleTodos = (todos, filter) => {
     switch(filter) {
@@ -12,22 +13,15 @@ const getVisibleTodos = (todos, filter) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onTodoClick: (id) => {
-            dispatch({
-                id: id,
-                type: 'TOGGLE_TODO',
-            });
-        },
-    };
-};
+const mapDispatchToProps = (dispatch) => ({
+    onTodoClick: (id) => {
+        dispatch(toggleTodo(id));
+    },
+});
 
-const mapStateToProps = (state) => {
-    return {
-        todos: getVisibleTodos(state.todos, state.visibilityFilter),
-    }
-};
+const mapStateToProps = (state) => ({
+    todos: getVisibleTodos(state.todos, state.visibilityFilter),
+});
 
 const VisibleTodoList = connect(
     mapStateToProps,
