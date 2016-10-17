@@ -10,11 +10,11 @@ let AddTodo = ({ dispatch }) => { // eslint-disable-line react/prop-types
         <div>
             <input ref={ node => {
                 input = node;
-            }} />
-            <button onClick={() => {
+            } } />
+            <button onClick={ () => {
                 dispatch(addTodo(input.value));
                 input.value = '';
-            }}>Add Todo</button>
+            } }>Add Todo</button>
         </div>
     );
 };

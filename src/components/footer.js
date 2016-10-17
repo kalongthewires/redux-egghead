@@ -5,21 +5,21 @@ const Footer = () => (
     <ul>
         <li>
             <FilterLink
-                filter='SHOW_ALL'
+                filter='all'
             >
                 All
             </FilterLink>
         </li>
         <li>
             <FilterLink
-                filter='SHOW_ACTIVE'
+                filter='active'
             >
                 Active
             </FilterLink>
         </li>
         <li>
             <FilterLink
-                filter='SHOW_COMPLETED'
+                filter='completed'
             >
                 Completed
             </FilterLink>
