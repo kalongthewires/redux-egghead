@@ -1,19 +1,15 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 import AddTodo from './../components/add-todo';
 import Footer from './../components/footer';
 import VisibleTodoList from './visible-todo-list';
 
-const TodoApp = ({ params }) => (
+const TodoApp = () => (
     <div>
         <AddTodo />
-        <VisibleTodoList filter={ params.filter || 'all' } />
+        <VisibleTodoList />
         <Footer />
     </div>
 );
-
-TodoApp.propTypes = {
-    params: PropTypes.object.isRequired,
-};
 
 export default TodoApp;
