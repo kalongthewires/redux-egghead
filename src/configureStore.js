@@ -1,12 +1,12 @@
 import { createStore } from 'redux';
 import { throttle } from 'lodash';
-import TodoAppReducer from './reducers/todos.reducer';
+import { todoApp } from './reducers/root.reducer';
 import { loadState, saveState } from './localStorage';
 
 const configureStore = () => {
     const persistedState = loadState();
     const store = createStore(
-        TodoAppReducer,
+        todoApp,
         persistedState,
     );
 
